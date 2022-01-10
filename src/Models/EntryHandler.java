@@ -70,7 +70,7 @@ public class EntryHandler {
                                 new Methods.SendListener() {
                                     @Override
                                     public void onSuccess() {
-
+                                        System.out.println("Email sent");
                                     }
 
                                     @Override

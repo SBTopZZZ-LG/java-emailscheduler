@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
     public static final String TEST_URL = "http://localhost:3000/";
-    public static final String BASE_URL = "https://quicc-server-eu.herokuapp.com/";
+    public static final String BASE_URL = "https://nodejs-emailscheduler-backend.sbtopzzzlg.repl.co/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
@@ -26,7 +26,7 @@ public class Client {
 
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(TEST_URL)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();
