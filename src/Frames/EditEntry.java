@@ -305,9 +305,13 @@ public class EditEntry extends JFrame {
                     return;
                 }
 
-                currentEntry.setRecipientEmail(body.recipientEmailTF.getText());
-                currentEntry.setSubject(body.subjectTF.getText());
-                currentEntry.setBody(body.bodyTA.getText());
+                if (!body.recipientEmailTF.getText().matches("[a-z0-9/._]+@[a-z0-9/._]+]")) {
+                    JOptionPane.showMessageDialog(EditEntry.this,
+                            "Enter a valid email address",
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
                 Calendar scheduleDateSelected = Calendar.getInstance();
                 scheduleDateSelected.setTimeZone(TimeZone.getDefault());
@@ -315,6 +319,24 @@ public class EditEntry extends JFrame {
                 scheduleDateSelected.set(Calendar.HOUR_OF_DAY, body.timePicker.getTime().getHour());
                 scheduleDateSelected.set(Calendar.MINUTE, body.timePicker.getTime().getMinute());
                 scheduleDateSelected.set(Calendar.SECOND, 0);
+
+                Calendar temp = Calendar.getInstance();
+                temp.setTimeZone(TimeZone.getDefault());
+                temp.setTime(new Date());
+
+                if (scheduleDateSelected.before(temp)) {
+                    // Date cannot be old
+
+                    JOptionPane.showMessageDialog(EditEntry.this,
+                            "Please choose a valid date",
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                currentEntry.setRecipientEmail(body.recipientEmailTF.getText());
+                currentEntry.setSubject(body.subjectTF.getText());
+                currentEntry.setBody(body.bodyTA.getText());
 
                 currentEntry.setSchedule(scheduleDateSelected.getTimeInMillis());
                 currentEntry.setPendingStatus(true);

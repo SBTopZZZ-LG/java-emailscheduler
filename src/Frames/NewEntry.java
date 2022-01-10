@@ -309,6 +309,14 @@ public class NewEntry extends JFrame {
                     return;
                 }
 
+                if (!body.recipientEmailTF.getText().matches("[a-z0-9._]+@[a-z0-9._]+")) {
+                    JOptionPane.showMessageDialog(NewEntry.this,
+                            "Enter a valid email address",
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 Calendar scheduleDateSelected = Calendar.getInstance();
                 scheduleDateSelected.setTimeZone(TimeZone.getDefault());
                 scheduleDateSelected.setTime(((UtilDateModel) body.scheduleDate.getModel()).getValue());

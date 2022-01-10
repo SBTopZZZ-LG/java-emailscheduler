@@ -1,5 +1,6 @@
 package Models;
 
+import API.Methods;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.ToNumberPolicy;
@@ -64,7 +65,19 @@ public class EntryHandler {
                     public void run() {
                         // Send email here!
 
-                        System.out.println("DOne!!!");
+                        Entry entry = entryTimer.entry;
+                        Methods.send(entry.getRecipientEmail(), entry.getSubject(), entry.getBody(),
+                                new Methods.SendListener() {
+                                    @Override
+                                    public void onSuccess() {
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Throwable t) {
+                                        System.out.println(t.getMessage());
+                                    }
+                                });
 
                         entryTimer.entry.setPendingStatus(false);
                         try {
