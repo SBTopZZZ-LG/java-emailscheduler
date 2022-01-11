@@ -10,7 +10,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
-    public static final String TEST_URL = "http://localhost:3000/";
     public static final String BASE_URL = "https://nodejs-emailscheduler-backend.sbtopzzzlg.repl.co/";
     private static Retrofit retrofit = null;
 

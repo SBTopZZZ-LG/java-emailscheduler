@@ -1,7 +1,5 @@
 package Models;
 
-import java.sql.Time;
-import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,8 +19,7 @@ public class Entry {
         recipientEmail = map.get("recipientEmail").toString();
         subject = map.get("subject").toString();
         body = map.get("body").toString();
-        long schedule = Long.parseLong(map.get("schedule").toString().split("E")[0].replace(".", ""));
-        this.schedule = schedule;
+        this.schedule = Long.parseLong(map.get("schedule").toString().split("E")[0].replace(".", ""));
         isPending = (boolean) map.get("isPending");
     }
     public Entry(String recipientEmail, String subject, String body, long schedule, boolean isPending) {

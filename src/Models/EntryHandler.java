@@ -27,7 +27,7 @@ public class EntryHandler {
             // Load data from file
             String content = new String(Files.readAllBytes(Paths.get(PATH)));
 
-            List entries = gson.fromJson(content, List.class);
+            var entries = gson.fromJson(content, List.class);
             if (entries != null)
                 for (Object entry : entries) {
                     Map<String, Object> entryMap = (Map<String, Object>) entry;
@@ -85,21 +85,25 @@ public class EntryHandler {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        for (Callback callback : callbacks)
-                            callback.updated();
+                        notifyChange();
 
                         entryTimer.timer = null;
                     }
                 }, diff);
             }
         }
+        notifyChange();
     }
     public static void save() throws IOException {
         String content = gson.toJson(map());
         Files.writeString(Paths.get(PATH), content);
     }
+    public static void notifyChange() {
+        for (Callback callback : callbacks)
+            callback.updated();
+    }
 
-    public static List<Entry> map() {
+    private static List<Entry> map() {
         List<Entry> entries = new ArrayList<>();
         for (EntryTimer entryTimer : EntryHandler.entries)
             entries.add(entryTimer.entry);
