@@ -1,3 +1,5 @@
+/* Code snipped referred from online (https://bosmeeuw.wordpress.com/2011/08/07/java-swing-automatically-resize-table-columns-to-their-contents/) */
+
 package Components;
 
 import javax.swing.*;
