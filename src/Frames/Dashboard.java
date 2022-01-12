@@ -5,6 +5,7 @@ import Components.HeadButton;
 import Components.SmartJFrame;
 import Models.EntryHandler;
 import Models.EntryTimer;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -21,6 +22,7 @@ class DashboardHead extends JPanel {
     private HeadButton editButton;
     private HeadButton deleteButton;
     private HeadButton sourceButton;
+    private HeadButton aboutButton;
 
     // Component data
     private Dashboard parent;
@@ -31,6 +33,7 @@ class DashboardHead extends JPanel {
         void onEdit(DashboardHead head);
         void onDelete(DashboardHead head);
         void onSource(DashboardHead head);
+        void onAbout(DashboardHead head);
     }
 
     public DashboardHead(Dashboard parent, InteractionListener listener) {
@@ -40,9 +43,7 @@ class DashboardHead extends JPanel {
         setSize(parent.getSize().width, headSize);
         setLocation(headLocation.x, headLocation.y);
         setBackground(Color.decode("#e3e3e3"));
-        FlowLayout fl = new FlowLayout();
-        fl.setAlignment(FlowLayout.LEADING);
-        setLayout(fl);
+        setLayout(new MigLayout("insets 5 10 5 10, fillx"));
 
         // Setup listener
         addButton = new HeadButton(this, "New Entry", "src/Resources/Images/add.png",
@@ -73,12 +74,20 @@ class DashboardHead extends JPanel {
                         listener.onSource(DashboardHead.this);
                     }
                 });
+        aboutButton = new HeadButton(this, "About Us", "src/Resources/Images/about.png",
+                new HeadButton.InteractionListener() {
+                    @Override
+                    public void onClick() {
+                        listener.onAbout(DashboardHead.this);
+                    }
+                });
 
         // Finalize
-        add(addButton);
-        add(editButton);
-        add(deleteButton);
-        add(sourceButton);
+        add(addButton, "width 80%");
+        add(editButton, "width 80%");
+        add(deleteButton, "width 80%");
+        add(sourceButton, "width 80%");
+        add(aboutButton, "width 80%");
     }
 }
 
@@ -99,6 +108,7 @@ class DashboardBody extends JPanel {
     }
     public void instantiate() {
         jTable = new JTable(new String[][]{}, header);
+        jTable.getTableHeader().setFont(jTable.getFont().deriveFont(Font.PLAIN, 13));
         jTable.setFont(jTable.getFont().deriveFont(Font.BOLD, 13));
         jTable.getModel().addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent e) {
@@ -235,6 +245,12 @@ public class Dashboard extends SmartJFrame {
                     System.out.println(e.getMessage());
                 }
             }
+
+            @Override
+            public void onAbout(DashboardHead head) {
+                AboutUs aboutUs = new AboutUs(Dashboard.this);
+                pushNext(aboutUs, false);
+            }
         });
         body = new DashboardBody(this);
         Dimension screenDims = Toolkit.getDefaultToolkit().getScreenSize();
@@ -248,7 +264,6 @@ public class Dashboard extends SmartJFrame {
         setSize(frameSize.x, frameSize.y);
         head.setSize(frameSize.x, head.getHeight());
         setLocation(startLocation.x, startLocation.y);
-        setResizable(false);
 
         // Finalize
         add(head, BorderLayout.PAGE_START);

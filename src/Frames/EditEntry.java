@@ -41,9 +41,7 @@ class EditEntryHead extends JPanel {
         setSize(parent.getSize().width, headSize);
         setLocation(headLocation.x, headLocation.y);
         setBackground(Color.decode("#e3e3e3"));
-        FlowLayout fl = new FlowLayout();
-        fl.setAlignment(FlowLayout.LEADING);
-        setLayout(fl);
+        setLayout(new MigLayout("insets 5 10 5 10, fillx"));
 
         // Instantiate
         backButton = new HeadButton(this, "Go Back", "src/Resources/Images/back.png",
@@ -62,8 +60,8 @@ class EditEntryHead extends JPanel {
                 });
 
         // Finalize
-        add(backButton);
-        add(saveButton);
+        add(backButton, "width 80%");
+        add(saveButton, "width 80%");
     }
 }
 
@@ -116,7 +114,6 @@ class EditEntryBody extends JPanel {
         body.setFont(body.getFont().deriveFont(Font.BOLD));
         bodyTA = new JTextArea();
         bodyTA.setRows(10);
-        bodyTA.setBorder(new LineBorder(Color.BLACK, 1, false));
         bodyScroll = new JScrollPane(bodyTA, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         bodyPanel.add(body, "wrap");
         bodyPanel.add(bodyScroll, "span, width 100%");
@@ -183,14 +180,14 @@ public class EditEntry extends SmartJFrame {
                 if (body.recipientEmailTF.getText().length() == 0 || body.subjectTF.getText().length() == 0 ||
                         body.bodyTA.getText().length() == 0 || !body.scheduleDate.getModel().isSelected()) {
                     JOptionPane.showMessageDialog(EditEntry.this,
-                            "Please fill all the fields before creating the entry",
+                            "Please fill all the fields before editing the entry.",
                             "Warning",
                             JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 if (!body.recipientEmailTF.getText().matches("[a-z0-9._]+@[a-z0-9._]+")) {
                     JOptionPane.showMessageDialog(EditEntry.this,
-                            "Enter a valid email address",
+                            "Enter a valid email address.",
                             "Warning",
                             JOptionPane.WARNING_MESSAGE);
                     return;
@@ -213,7 +210,7 @@ public class EditEntry extends SmartJFrame {
                     // Date cannot be old
 
                     JOptionPane.showMessageDialog(EditEntry.this,
-                            "Please choose a valid date",
+                            "Please choose a valid date/time.",
                             "Warning",
                             JOptionPane.WARNING_MESSAGE);
                     return;
@@ -253,7 +250,6 @@ public class EditEntry extends SmartJFrame {
         Dimension screenDims = Toolkit.getDefaultToolkit().getScreenSize();
         startLocation = new Point(screenDims.width / 2 - frameSize.x / 2, screenDims.height / 2 - frameSize.y / 2);
         setLocation(startLocation.x, startLocation.y);
-        setResizable(false);
 
         // Set entry details
         body.recipientEmailTF.setText(currentEntry.getRecipientEmail());

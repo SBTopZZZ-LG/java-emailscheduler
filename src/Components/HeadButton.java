@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 public class HeadButton extends JPanel {
     // Components
-    private ImageIcon icon;
+    private JLabel icon;
     private JLabel text;
 
     // Component data
@@ -26,24 +26,21 @@ public class HeadButton extends JPanel {
         setLocation(btnLocation.x + 10, btnLocation.y + 10);
         setSize(parent.getHeight(), parent.getHeight());
         setBackground(parent.getBackground());
-        border.setBorderInsets(new Insets(1, 1, 1, 1));
+        border.setBorderInsets(new Insets(2, 2, 2, 2));
         border.setCornerRadius(5);
         border.setBackground(Color.WHITE);
         setBorder(border);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         // Instantiate
-        icon = new ImageIcon(imageLocation);
-        icon = new ImageIcon(icon.getImage().getScaledInstance((int) (getWidth() / 2), (int) (getHeight() / 2), java.awt.Image.SCALE_SMOOTH));
         this.text = new JLabel(text);
-        Font ft = this.text.getFont();
-        ft = ft.deriveFont(Font.BOLD, 15);
-        this.text.setFont(ft);
-        JLabel img = new JLabel(icon);
-        img.setLocation(100, 5);
+        this.text.setFont(this.text.getFont().deriveFont(Font.BOLD, 12));
+        ImageIcon icon = new ImageIcon(imageLocation);
+        icon = new ImageIcon(icon.getImage().getScaledInstance((int) (getWidth() / 2), (int) (getHeight() / 2), java.awt.Image.SCALE_SMOOTH));
+        this.icon = new JLabel(icon);
 
         // Finalize
-        add(img);
+        add(this.icon);
         add(this.text);
 
         // Setup listener
@@ -73,7 +70,7 @@ public class HeadButton extends JPanel {
 
             }
         });
-        img.addMouseListener(getMouseListeners()[0]);
+        this.icon.addMouseListener(getMouseListeners()[0]);
         this.text.addMouseListener(getMouseListeners()[0]);
     }
 
