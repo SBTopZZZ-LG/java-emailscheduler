@@ -8,6 +8,7 @@ public abstract class SmartJFrame extends JFrame {
     protected SmartJFrame previous;
     public SmartJFrame(SmartJFrame previous) {
         this.previous = previous;
+        setVisible(false);
 
         if (previous == null)
             // If previous is null then exit application on closing
