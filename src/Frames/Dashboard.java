@@ -166,7 +166,7 @@ public class Dashboard extends SmartJFrame {
     private DashboardBody body;
 
     // Component data
-    private Point frameSize = new Point(700, 600);
+    private Dimension frameSize = new Dimension(700, 600);
     private Point startLocation;
     private final String startTitle = "Email Scheduler - Dashboard";
 
@@ -254,15 +254,15 @@ public class Dashboard extends SmartJFrame {
         });
         body = new DashboardBody(this);
         Dimension screenDims = Toolkit.getDefaultToolkit().getScreenSize();
-        startLocation = new Point(screenDims.width / 2 - frameSize.x / 2, screenDims.height / 2 - frameSize.y / 2);
+        startLocation = new Point(screenDims.width / 2 - frameSize.width / 2, screenDims.height / 2 - frameSize.width / 2);
 
         // Set frame properties
         setLayout(new BorderLayout());
         setTitle(startTitle);
         pack();
         setLocationRelativeTo(null); // Sets position to center
-        setSize(frameSize.x, frameSize.y);
-        head.setSize(frameSize.x, head.getHeight());
+        setSize(frameSize);
+        head.setSize(frameSize.width, head.getHeight());
         setLocation(startLocation.x, startLocation.y);
 
         // Finalize

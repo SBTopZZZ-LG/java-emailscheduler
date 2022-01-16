@@ -161,7 +161,7 @@ public class NewEntry extends SmartJFrame {
     private NewEntryBody body;
 
     // Component data
-    private Point frameSize = new Point(500, 700);
+    private Dimension frameSize = new Dimension(500, 700);
     private Point startLocation;
     private final String startTitle = "Email Scheduler - New Entry";
 
@@ -259,9 +259,9 @@ public class NewEntry extends SmartJFrame {
         setTitle(startTitle);
         pack();
         setLocationRelativeTo(null); // Sets position to center
-        setSize(frameSize.x, frameSize.y);
+        setSize(frameSize);
         Dimension screenDims = Toolkit.getDefaultToolkit().getScreenSize();
-        startLocation = new Point(screenDims.width / 2 - frameSize.x / 2, screenDims.height / 2 - frameSize.y / 2);
+        startLocation = new Point(screenDims.width / 2 - frameSize.width / 2, screenDims.height / 2 - frameSize.width / 2);
         setLocation(startLocation.x, startLocation.y);
 
         // Finalize

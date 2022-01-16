@@ -3,22 +3,14 @@ package Frames;
 import Components.HeadButton;
 import Components.RoundedBorder;
 import Components.SmartJFrame;
-import Models.Entry;
-import Models.EntryHandler;
-import Models.EntryTimer;
 import Models.User;
 import net.miginfocom.swing.MigLayout;
-import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 class AboutUsHead extends JPanel {
     // Components
@@ -59,13 +51,10 @@ class AboutUsBodyDetailPanel extends JPanel {
     // Components
     private JPanel dataPanel;
     private JPanel socialsPanel;
-    private JPanel positionPanel;
 
     private JLabel avatar, linkedin, instagram;
     private JLabel name;
-    private JLabel email;
-    private JLabel position;
-    private JTextArea bio;
+    private JLabel usn;
 
     // Component data
     private AboutUsBody parent;
@@ -77,8 +66,7 @@ class AboutUsBodyDetailPanel extends JPanel {
 
         // Instantiate
         ImageIcon icon = new ImageIcon(user.getImageLocation());
-//        Dimension newDimension = new Dimension(130, 130 * icon.getIconHeight() / icon.getIconWidth());
-        icon = new ImageIcon(icon.getImage().getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH));
+        icon = new ImageIcon(icon.getImage().getScaledInstance(110, 110, java.awt.Image.SCALE_SMOOTH));
         avatar = new JLabel(icon);
         avatar.setBorder(new LineBorder(Color.BLACK, 1, false));
 
@@ -162,40 +150,14 @@ class AboutUsBodyDetailPanel extends JPanel {
         socialsPanel.add(linkedin);
         socialsPanel.add(instagram, "gap 10");
 
-        email = new JLabel(user.getEmailAddress());
-        email.setFont(email.getFont().deriveFont(Font.BOLD, 13));
-
-        position = new JLabel(user.getPosition());
-        position.setFont(position.getFont().deriveFont(Font.BOLD, 13));
-        position.setForeground(user.getColor());
-
-        positionPanel = new JPanel(new MigLayout("insets 5 10 5 10, fillx"));
-        RoundedBorder positionPanelBorder = new RoundedBorder();
-        positionPanelBorder.setBorderInsets(new Insets(1,1, 1, 1));
-        positionPanelBorder.setCornerRadius(10);
-        positionPanelBorder.setBackground(Color.WHITE);
-        positionPanelBorder.setBorderColor(user.getColor());
-        positionPanelBorder.setBorderThickness(2);
-        positionPanel.setBorder(positionPanelBorder);
-        positionPanel.setBackground(Color.WHITE);
-        positionPanel.add(position);
-
-        bio = new JTextArea(2, 20);
-        bio.setText("❝ " + user.getBio() + " ❞");
-        bio.setWrapStyleWord(true);
-        bio.setLineWrap(true);
-        bio.setOpaque(false);
-        bio.setEditable(false);
-        bio.setFocusable(false);
-        bio.setFont(bio.getFont().deriveFont(Font.ITALIC, 12));
+        usn = new JLabel(user.getUsn());
+        usn.setFont(usn.getFont().deriveFont(Font.BOLD, 13));
 
         dataPanel = new JPanel();
         dataPanel.setLayout(new MigLayout("insets 2 2 2 2"));
         dataPanel.add(name, "width 100%, wrap");
         dataPanel.add(socialsPanel, "width 100%, wrap");
-        dataPanel.add(email, "width 100%, wrap");
-//        dataPanel.add(positionPanel, "wrap");
-        dataPanel.add(bio, "");
+        dataPanel.add(usn, "width 100%");
 
         // Set properties
         setLayout(new MigLayout("insets 5 5 5 5, fillx"));
@@ -216,6 +178,7 @@ class AboutUsBodyDetailPanel extends JPanel {
 
 class AboutUsBody extends JPanel {
     // Components
+    private JLabel heading;
     private AboutUsBodyDetailPanel user1, user2, user3, user4;
 
     // Component data
@@ -225,43 +188,38 @@ class AboutUsBody extends JPanel {
         this.parent = parent;
 
         // Instantiate
+        heading = new JLabel("A project by");
+        heading.setFont(heading.getFont().deriveFont(Font.BOLD, 20));
         user1 = new AboutUsBodyDetailPanel(this,
                 new User("Saumitra Topinkatti",
-                        "sbtopzzz@gmail.com",
-                        "src/Resources/Images/person1.jpeg",
-                        "Software Programmer", "I'm just a regular everyday normal motherf+xker.\nI guess the air is jealous of me :).",
-                        Color.decode("#dd0000"),
+                        "2GI20CS133",
+                        "src/Resources/Images/person1_2.jpeg",
                         new User.Socials("https://linkedin.com", "https://instagram.com")));
         user2 = new AboutUsBodyDetailPanel(this,
                 new User("Shamant Myageri",
-                        "sbtopzzz@gmail.com",
-                        "src/Resources/Images/person1.jpeg",
-                        "Software Programmer", "I'm just a regular everyday normal motherf+xker.\nI guess the air is jealous of me :).",
-                        Color.decode("#dd0000"),
+                        "2GI20CS134",
+                        "src/Resources/Images/person2.jpg",
                         new User.Socials("https://linkedin.com", "https://instagram.com")));
         user3 = new AboutUsBodyDetailPanel(this,
                 new User("Shivani Patil",
-                        "sbtopzzz@gmail.com",
-                        "src/Resources/Images/person1.jpeg",
-                        "UI/UX Designer", "I'm just a regular everyday normal motherf+xker.\nI guess the air is jealous of me :).",
-                        Color.decode("#dd0000"),
+                        "2GI20CS139",
+                        "src/Resources/Images/person3.jpeg",
                         new User.Socials("https://linkedin.com", "https://instagram.com")));
         user4 = new AboutUsBodyDetailPanel(this,
                 new User("Shivam Karamudi",
-                        "sbtopzzz@gmail.com",
-                        "src/Resources/Images/person1.jpeg",
-                        "Idk Mane", "I'm just a regular everyday normal motherf+xker.\nI guess the air is jealous of me :).",
-                        Color.decode("#dd0000"),
+                        "2GI20CS137",
+                        "src/Resources/Images/person4.png",
                         new User.Socials("https://linkedin.com", "https://instagram.com")));
 
         // Set properties
-        setLayout(new GridLayout(4, 1));
+        setLayout(new MigLayout("insets 5 5 5 5"));
 
         // Finalize
-        add(user1);
-        add(user2);
-        add(user3);
-        add(user4);
+        add(heading, "wrap, width 100%");
+        add(user1, "wrap, width 100%");
+        add(user2, "wrap, width 100%");
+        add(user3, "wrap, width 100%");
+        add(user4, "width 100%");
     }
 }
 

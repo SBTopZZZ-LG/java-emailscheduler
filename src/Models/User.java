@@ -1,7 +1,5 @@
 package Models;
 
-import java.awt.*;
-
 public class User {
     public static class Socials {
         private final String linkedIn;
@@ -22,30 +20,14 @@ public class User {
     }
 
     private final String fullName;
-    private final String emailAddress;
+    private final String usn;
     private final String imageLocation;
-    private final String position;
-    private final String bio;
-    private final Color color;
     private final Socials socials;
 
-    public User(String fullName, String emailAddress, String imageLocation, String position, String bio, Socials socials) {
+    public User(String fullName, String usn, String imageLocation, Socials socials) {
         this.fullName = fullName;
-        this.emailAddress = emailAddress;
+        this.usn = usn;
         this.imageLocation = imageLocation;
-        this.position = position;
-        this.bio = bio;
-        this.color = Color.BLACK;
-        this.socials = socials;
-    }
-
-    public User(String fullName, String emailAddress, String imageLocation, String position, String bio, Color color, Socials socials) {
-        this.fullName = fullName;
-        this.emailAddress = emailAddress;
-        this.imageLocation = imageLocation;
-        this.position = position;
-        this.bio = bio;
-        this.color = color;
         this.socials = socials;
     }
 
@@ -53,24 +35,12 @@ public class User {
         return fullName;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getUsn() {
+        return usn;
     }
 
     public String getImageLocation() {
         return imageLocation;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public Color getColor() {
-        return color;
     }
 
     public Socials getSocials() {

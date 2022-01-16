@@ -1,6 +1,7 @@
 package Components;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,8 +14,6 @@ public class HeadButton extends JPanel {
     // Component data
     private Component parent;
     private Point btnLocation = new Point(0, 0);
-    private RoundedBorder border = new RoundedBorder();
-    private boolean enabled = true;
     public interface InteractionListener {
         void onClick();
     }
@@ -25,11 +24,8 @@ public class HeadButton extends JPanel {
         // Set properties
         setLocation(btnLocation.x + 10, btnLocation.y + 10);
         setSize(parent.getHeight(), parent.getHeight());
-        setBackground(parent.getBackground());
-        border.setBorderInsets(new Insets(2, 2, 2, 2));
-        border.setCornerRadius(5);
-        border.setBackground(Color.WHITE);
-        setBorder(border);
+        setBackground(Color.WHITE);
+        setBorder(new LineBorder(Color.BLACK, 1, true));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         // Instantiate
@@ -72,18 +68,5 @@ public class HeadButton extends JPanel {
         });
         this.icon.addMouseListener(getMouseListeners()[0]);
         this.text.addMouseListener(getMouseListeners()[0]);
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-
-        setBackground(enabled ? parent.getBackground() : Color.GRAY);
-        border.setBackground(enabled ? Color.WHITE : Color.GRAY);
-        setBorder(border);
-        text.setForeground(enabled ? Color.BLACK : Color.darkGray);
-        setCursor(enabled ? Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) : Cursor.getDefaultCursor());
     }
 }
